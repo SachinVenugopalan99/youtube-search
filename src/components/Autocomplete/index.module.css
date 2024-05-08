@@ -1,0 +1,54 @@
+.autoSuggestion {
+    width: 400px;
+    margin-top: 50px;
+    position: relative;
+}
+
+.inputBox {
+    width: 100%;
+    height: 30px;
+}
+
+.suggestions {
+    max-height: 500px;
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.item {
+    padding: 8px;
+    width: 100%;
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.cursorHover {
+    cursor: none;
+}
+
+ul {
+    margin: 5px 0px;
+}
+
+.focused {
+    background-color: #fef5ec;
+    pointer-events: none;
+}
+
+.noData{
+    height: 200px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
