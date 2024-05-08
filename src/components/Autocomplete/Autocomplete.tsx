@@ -1,6 +1,7 @@
 import React, {useState, useRef, useEffect, FC, useCallback, useMemo, memo} from 'react'
 import styles from  './index.module.css';
 import Card from './Card';
+import SeachBox from './SeachBox';
 
 interface AutocompleteProps {
   options: any[];
@@ -41,13 +42,13 @@ const Autocomplete:FC<AutocompleteProps> = ({options=[]}) => {
 
   useEffect(() => {
     // Scroll focused item into view when list changes
-    if (focusedIndex !== -1 && listRef.current) {
+    if (focusedIndex !== -1 && listRef.current && !cursorHovering) {
       const focusedItem = listRef.current.children[focusedIndex];
       if (focusedItem) {
-        focusedItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        focusedItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     }
-  }, [focusedIndex]);
+  }, [focusedIndex, cursorHovering]);
 
   const highlightSearchTerm = useCallback((item: any) => {
    return item?.replace(new RegExp(value, 'gi'),(match : any) =>
@@ -99,11 +100,10 @@ const Autocomplete:FC<AutocompleteProps> = ({options=[]}) => {
   return (
     <div className={styles.autoSuggestion} ref={autocompleteRef}>
       <div>
-        <input
-          className={styles.inputBox}
-          onFocus={() => setShowSuggestions(true)}
-          onChange={handleChange}
-          onKeyDown={handleKeyDown}
+        <SeachBox 
+        onFocus={() => setShowSuggestions(true)}           
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
         />
       </div>
       {showSuggestions && (
